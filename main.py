@@ -40,23 +40,57 @@ class JugarPage2(Handler):
         resp=self.request.get('respuesta')
         PC=random.choice(["a","b","c"])
         if resp.lower() == PC:
-            resultado="Empate"
+            resultado="/static/img/empate.png"
+            fondo="alert-dark"
+            tema="bg-secondary"
+            if PC == "a":
+                resp="/static/img/piedra.png"
+                PC="/static/img/piedraPC.png"
+            elif PC=="b":
+                resp="/static/img/papel.png"
+                PC="/static/img/papelPC.png"
+            else:
+                resp="/static/img/tijera.png"
+                PC="/static/img/tijeraPC.png"
+            
         elif resp.lower() == "a" and PC == "b":
-            resultado="Has Perdio"
+            resultado="/static/img/perder.png"
+            fondo="alert-danger"
+            tema="bg-danger"
+            resp="/static/img/piedra.png"
+            PC="/static/img/papelPC.png"
         elif resp.lower() ==  "a" and PC == "c":
-            resultado="Has Ganado"
+            resultado="/static/img/ganar.png"
+            fondo="alert-success"
+            tema="bg-success"
+            resp="/static/img/piedra.png"
+            PC="/static/img/tijeraPC.png"
         elif resp.lower() == "c" and PC == "a":
-            resultado="Has Perdido"
+            resultado="/static/img/perder.png"
+            fondo="alert-danger"
+            tema="bg-danger"
+            resp="/static/img/tijera.png"
+            PC="/static/img/piedraPC.png"
         elif (resp.lower() == "c" and PC == "b" ):
-            resultado="Has Ganado"
+            resultado="/static/img/ganar.png"
+            fondo="alert-success"
+            tema="bg-success"
+            resp="/static/img/tijera.png"
+            PC="/static/img/papelPC.png"
         elif (resp.lower() == "b" and PC == "a"):
-            resultado="Has Ganado"
+            resultado="/static/img/ganar.png"
+            fondo="alert-success"
+            tema="bg-success"
+            resp="/static/img/papel.png"
+            PC="/static/img/piedraPC.png"
         elif (resp.lower() == "b" and PC == "c"):
-            resultado="Has Perdido"
-        else:
-            resultado="Caracter Invalido"
+            resultado="/static/img/perder.png"
+            fondo="alert-danger"
+            tema="bg-danger"
+            resp="/static/img/papel.png"
+            PC="/static/img/tijeraPC.png"
 
-        self.render("Juego2.html" ,usuario = usuario, resp = resp, PC=PC, resultado=resultado)
+        self.render("Juego2.html" ,usuario = usuario, resp = resp, PC=PC, resultado=resultado ,fondo=fondo,tema=tema)
 
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/click_login',MainPage),

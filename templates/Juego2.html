@@ -13,7 +13,7 @@
     <title>Hello, world!</title>
 </head>
 
-<body class="p-3 mb-2 bg-info text-white">
+<body class="p-3 mb-2 {{tema}} text-white">
     <br>
     <br>
 
@@ -23,16 +23,28 @@
                 <!-- Columna izquierda-->
             </div>
 
-            <div class="col-8 text-center alert-dark">
+            <div class="col-8 text-center {{fondo}}">
+                <br>
+                <img src="{{resultado}}" width="50%" height="auto">
                 <h1 class="display-3">
-                    {{resultado}}
-                    Tu: {{resp}}
-                    PC: {{PC}}
 
                 </h1>
-                <br>
-                <br>
-                <br>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h5>TU</h5>
+                            <img src="{{resp}}" width="200" height="200">
+                            
+                        </div>
+                        <div class="col">
+                            <h5>PC</h5>
+                            <img src="{{PC}}" width="200" height="200">
+                            
+                        </div>
+                    </div>
+                </div>
+
                 <form action="/click_jugar" method="post">
                     <div class=" btn-block">
                         <input type="Hidden" name="nombre" value="{{usuario}}">
