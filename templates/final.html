@@ -13,7 +13,7 @@
     <title>Hello, world!</title>
 </head>
 
-<body class="p-3 mb-2 {{tema}} text-white">
+<body class="p-3 mb-2 bg-{{tema}} text-white">
     
     <div class="container">
         <div class="row">
@@ -21,19 +21,19 @@
                 <!-- Columna izquierda-->
             </div>
 
-            <div class="col-8 text-center {{fondo}}">
+            <div class="col-8 text-center alert-{{fondo}}">
                 <br>
-                <img src="{{resultado}}" width="50%" height="auto">
+                <img src="/static/img/{{resultado}}.png" width="50%" height="auto">
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <h5>TU</h5>
-                            <img src="{{resp}}" width="200" height="200">
+                            <img src="/static/img/{{resp}}.png" width="200" height="200">
 
                         </div>
                         <div class="col">
                             <h5>PC</h5>
-                            <img src="{{PC}}" width="200" height="200">
+                            <img src="/static/img/{{PC}}.png" width="200" height="200">
 
                         </div>
                     </div>
