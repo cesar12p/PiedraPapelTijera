@@ -14,9 +14,7 @@
 </head>
 
 <body class="p-3 mb-2 {{tema}} text-white">
-    <br>
-    <br>
-
+    
     <div class="container">
         <div class="row">
             <div class="col-2">
@@ -26,28 +24,58 @@
             <div class="col-8 text-center {{fondo}}">
                 <br>
                 <img src="{{resultado}}" width="50%" height="auto">
-                <h1 class="display-3">
-
-                </h1>
-
                 <div class="container">
                     <div class="row">
                         <div class="col">
                             <h5>TU</h5>
                             <img src="{{resp}}" width="200" height="200">
-                            
+
                         </div>
                         <div class="col">
                             <h5>PC</h5>
                             <img src="{{PC}}" width="200" height="200">
-                            
+
                         </div>
                     </div>
                 </div>
 
-                <h1>Intentos: {{intent}}</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center bg-secondary text-white">
+                            <h2>Juego {{intent}}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center bg-dark text-white">
+                            <h1>Marcador</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center bg-dark text-white">
+
+                            <h2>{{intentUsu}}</h2>
+                        </div>
+                        <div class="col text-center bg-dark text-white">
+                            <h2>{{intentPC}}</h2>
+                            
+                        </div>
+                    </div>
+                    <h3>Fin del Juego</h3>
+                    <div class="row">
+                        <div class="col">
+                           <img src="/static/img/{{copa}}.png" width="auto" height="auto">
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <form action="/" method="get">
+                    <button type="submit" class="btn btn-primary">Menu Principal</button>
+                </form>
                 <br>
-                <br>
+
+
+
             </div>
 
             <div class="col-2">
@@ -59,21 +87,6 @@
     <br>
     <br>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-                <!-- Columna izquierda-->
-            </div>
-
-            <div class="col-8 text-center {{fondo}}">
-                <h1>Aqui</h1>
-            </div>
-
-            <div class="col-2">
-                <!-- Columna izquierda-->
-            </div>
-        </div>
-    </div>
 
 
     <!-- Optional JavaScript -->

@@ -127,7 +127,11 @@ class JugarPage2(Handler):
             intentPC=cont2+1
         
         if (intentUsu==2 or intentPC==2):
-            self.render("final.html",usuario=usuario, resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema,intent=intent,intentUsu=intentUsu, intentPC=intentPC)
+            if intentUsu==2:
+                copa="copa"
+            else:
+                copa="copa2"
+            self.render("final.html",usuario=usuario, resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema,intent=intent,intentUsu=intentUsu, intentPC=intentPC, copa=copa)
         else:
             self.render("Juego2.html", usuario=usuario, resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema, intent=intent, intentUsu=intentUsu, intentPC=intentPC)
 

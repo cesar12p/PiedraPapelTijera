@@ -14,9 +14,6 @@
 </head>
 
 <body class="p-3 mb-2 {{tema}} text-white">
-    <br>
-    <br>
-
     <div class="container">
         <div class="row">
             <div class="col-2">
@@ -35,25 +32,47 @@
                         <div class="col">
                             <h5>TU</h5>
                             <img src="{{resp}}" width="200" height="200">
-                            
+
                         </div>
                         <div class="col">
                             <h5>PC</h5>
                             <img src="{{PC}}" width="200" height="200">
-                            
+
                         </div>
                     </div>
                 </div>
 
-                <h1>Intentos: {{intent}}</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center bg-secondary text-white">
+                            <h2>Juego {{intent}}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center bg-dark text-white">
+                            <h1>Marcador</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center bg-dark text-white">
+                            
+                            <h2>{{intentUsu}}</h2>
+                        </div>
+                        <div class="col text-center bg-dark text-white">
+                            <h2>{{intentPC}}</h2>
+                        </div>
+                    </div>
+                </div>
+                <br>
 
+                <h1>{{usuario}}</h1>
                 <form action="/click_jugar" method="post">
                     <div class=" btn-block">
                         <input type="Hidden" name="nombre" value="{{usuario}}">
                         <input type="Hidden" name="intentos" value="{{intent}}">
                         <input type="Hidden" name="intentoUsu" value="{{intentUsu}}">
                         <input type="Hidden" name="intentoPC" value="{{intentPC}}">
-                        <button type="submit" class="btn btn-outline-success btn-block">Reintentar</button>
+                        <button type="submit" class="btn btn-primary">Reintentar</button>
 
                     </div>
                 </form>
