@@ -3,7 +3,11 @@ import webapp2
 import os
 import jinja2
 import random
-
+usuario =""
+intent =0
+intentUsu=0
+intentPC=0
+resp=""
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(
         os.path.dirname(__file__), "templates")),
@@ -22,30 +26,32 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
     def get(self):
         self.render("index.html")
+        global usuario 
+        usuario=""
+        global intent 
+        intent=0
+        global intentUsu
+        intentUsu=0
+        global intentPC
+        intentPC=0
+        global resp
+        resp=""
 
     def post(self):
-        usuario = self.request.get('user')
-        intent = self.request.get('intentos')
-        intentUsu = self.request.get('intentoUsu')
-        intentPC = self.request.get('intentoPC')
-        self.render("Bienvenido.html", usuario=usuario,
-                    intent=intent, intentUsu=intentUsu, intentPC=intentPC)
+        global usuario
+        usuario= self.request.get('user')
+        self.render("Bienvenido.html", usuario=usuario)
 class JugarPage(Handler):
     def post(self):
-        usuario = self.request.get('nombre')
-        intent = self.request.get('intentos')
-        intentUsu = self.request.get('intentoUsu')
-        intentPC = self.request.get('intentoPC')
-        self.render("Juego.html", usuario=usuario, intent=intent, intentUsu=intentUsu, intentPC=intentPC)
+        global usuario
+        self.render("Juego.html", usuario=usuario)
 class JugarPage2(Handler):
     def post(self):
-        usuario = self.request.get('nombre')
         resp = self.request.get('respuesta')
-        intent = self.request.get('intentos')
-        intentUsu = self.request.get('intentoUsu')
-        intentPC = self.request.get('intentoPC')
-        cont = int(intent)
-        intent = cont+1
+        global intent
+        global intentUsu
+        global intentPC
+        intent +=1
         PC = random.choice(["a", "b", "c"])
         if resp.lower() == PC:
             resultado = "empate"
@@ -60,63 +66,56 @@ class JugarPage2(Handler):
             else:
                 resp = "tijera"
                 PC = "tijeraPC"
-
         elif resp.lower() == "a" and PC == "b":
             resultado = "perder"
             fondo = "danger"
             tema = "danger"
             resp = "piedra"
             PC = "papelPC"
-            cont2= int(intentPC)
-            intentPC=cont2+1
+            intentPC +=1
         elif resp.lower() == "a" and PC == "c":
             resultado = "ganar"
             fondo = "success"
             tema = "success"
             resp = "piedra"
             PC = "tijeraPC"
-            cont1= int(intentUsu)
-            intentUsu=cont1+1
+            intentUsu +=1
         elif resp.lower() == "c" and PC == "a":
             resultado = "perder"
             fondo = "danger"
             tema = "danger"
             resp = "tijera"
             PC = "piedraPC"
-            cont2= int(intentPC)
-            intentPC=cont2+1
+            intentPC +=1
         elif (resp.lower() == "c" and PC == "b"):
             resultado = "ganar"
             fondo = "success"
             tema = "success"
             resp = "tijera"
             PC = "papelPC"
-            cont1= int(intentUsu)
-            intentUsu=cont1+1
+            intentUsu +=1
         elif (resp.lower() == "b" and PC == "a"):
             resultado = "ganar"
             fondo = "success"
             tema = "success"
             resp = "papel"
             PC = "piedraPC"
-            cont1= int(intentUsu)
-            intentUsu=cont1+1
+            intentUsu +=1
         elif (resp.lower() == "b" and PC == "c"):
             resultado = "perder"
             fondo = "danger"
             tema = "danger"
             resp = "papel"
             PC = "tijeraPC"
-            cont2= int(intentPC)
-            intentPC=cont2+1
+            intentPC +=1
         if (intentUsu==2 or intentPC==2):
             if intentUsu==2:
                 copa="copa"
             else:
                 copa="copa2"
-            self.render("final.html",usuario=usuario, resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema,intent=intent,intentUsu=intentUsu, intentPC=intentPC, copa=copa)
+            self.render("final.html", resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema,intent=intent,intentUsu=intentUsu, intentPC=intentPC, copa=copa)
         else:
-            self.render("Juego2.html", usuario=usuario, resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema, intent=intent, intentUsu=intentUsu, intentPC=intentPC)
+            self.render("Juego2.html", resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema, intent=intent, intentUsu=intentUsu, intentPC=intentPC)
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/click_login', MainPage),
                                ('/click_jugar', JugarPage),
