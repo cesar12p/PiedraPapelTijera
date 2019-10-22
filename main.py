@@ -3,17 +3,24 @@ import webapp2
 import os
 import jinja2
 import random
+from google.appengine.ext import ndb
 usuario =""
 intent =0
 intentUsu=0
 intentPC=0
 resp=""
+password=""
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(
         os.path.dirname(__file__), "templates")),
     extensions=["jinja2.ext.autoescape"],
     autoescape=True
 )
+class Objeto_Usuario(ndb.Model):
+    usuario=ndb.StringProperty()
+    password=ndb.StringProperty()
+    ganadas=ndb.IntegerProperty()
+    perdidas=ndb.IntegerProperty()
 def render_str(template, **params):
     t = JINJA_ENVIRONMENT.get_template(template)
     return t.render(params)
@@ -37,10 +44,24 @@ class MainPage(Handler):
         global resp
         resp=""
 
+
     def post(self):
         global usuario
         usuario= self.request.get('user')
-        self.render("Bienvenido.html", usuario=usuario)
+        global password
+        password=self.request.get('contra')
+        consulta = Objeto_Usuario.query(ndb.AND(Objeto_Usuario.usuario==usuario,Objeto_Usuario.password==password)).get()
+
+        if consulta is None:
+            obj=Objeto_Usuario()
+            obj.usuario=usuario
+            obj.password=password
+            obj.ganadas=0
+            obj.perdidas=0
+            obj.put()
+            self.render("Bienvenido.html", usuario=usuario)
+        else:
+            self.render("Bienvenido.html",usuario=usuario)
 class JugarPage(Handler):
     def post(self):
         global usuario
@@ -109,10 +130,20 @@ class JugarPage2(Handler):
             PC = "tijeraPC"
             intentPC +=1
         if (intentUsu==2 or intentPC==2):
+            global usuario
+            global password
+            consulta = Objeto_Usuario.query(ndb.AND(Objeto_Usuario.usuario==usuario,Objeto_Usuario.password==password)).get()
+
             if intentUsu==2:
                 copa="copa"
+                if consulta is not None:
+                    consulta.ganadas=consulta.ganadas+1
+                    consulta.put()
             else:
                 copa="copa2"
+                if consulta is not None:
+                    consulta.perdidas=consulta.perdidas+1
+                    consulta.put()
             self.render("final.html", resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema,intent=intent,intentUsu=intentUsu, intentPC=intentPC, copa=copa)
         else:
             self.render("Juego2.html", resp=resp, PC=PC,resultado=resultado, fondo=fondo, tema=tema, intent=intent, intentUsu=intentUsu, intentPC=intentPC)
