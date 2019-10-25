@@ -10,6 +10,12 @@
 </head>
 
 <body class="p-3 mb-2 bg-{{tema}} text-white">
+        {% if user.user %}	
+		<nav class="navbar navbar-light bg-{{tema}}">
+				<a class="navbar-brand" href="/salir">
+				  <img src="/static/img/salir.png" width="30" height="30" alt="">
+				</a>
+			  </nav>
     <div class="container">
         <div class="row">
             <div class="col-2">
@@ -68,6 +74,9 @@
     </div>
     <br>
     <br>
+    {% else %}
+    <h1>Necesitas iniciar sesion</h1>
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

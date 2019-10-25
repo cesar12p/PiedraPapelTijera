@@ -11,6 +11,13 @@
 </head>
 
 <body class="p-3 mb-2 bg-info text-white">
+        {% if user.user %}	
+		<nav class="navbar navbar-light bg-info">
+				<a class="navbar-brand" href="/salir">
+				  <img src="/static/img/salir.png" width="30" height="30" alt="">
+				</a>
+			  </nav>
+			  
     <br>
     <br>
     <div class="container">
@@ -20,7 +27,7 @@
             </div>
             <div class="col-8 text-center alert-dark">
                 <h1 class="display-4">
-                    {{usuario}} selecciona una opcion </h1>
+                        {{user.user}} selecciona una opcion </h1>
                 <br>
                 <div class="container">
                     <div class="row">
@@ -55,6 +62,9 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h1>Necesitas iniciar sesion</h1>
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -64,6 +74,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        
+
 </body>
 
 </html>
